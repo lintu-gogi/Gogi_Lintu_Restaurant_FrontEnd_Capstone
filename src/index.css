@@ -1,0 +1,60 @@
+
+.App{
+  background-color: brown;
+}
+.nav {
+  display: flex;
+  justify-content: space-between;
+  background-color: black;
+  color: white;
+  padding: 15px;
+  font-size: 2em;
+}
+
+.nav a {
+  color: white;
+  text-decoration: none;
+}
+h1{
+  text-align: center;
+  /* background-color: bisque; */
+}
+#headerId{
+  background-color: bisque;
+}
+#location_time{
+  justify-items: left;
+}
+#label_Id{
+  width:240px;
+  display: inline-block;
+}
+#headerId {
+  background-color: bisque;
+  transition-property: background-color;
+  transition-duration: 2s;
+}
+#headerId:hover {
+  background-color:darkgoldenrod;
+}
+#img_Id {
+  border-radius: 0%;
+  -webkit-transition: -webkit-transform .8s ease-in-out;
+          transition:         transform .8s ease-in-out;
+}
+
+#img_Id:hover {
+  -webkit-transform: rotate(360deg);
+          transform: rotate(360deg);
+}
+.image-reserve {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+}
+
+.image-reserve img {
+  max-width: 50%;
+  height: auto;
+}

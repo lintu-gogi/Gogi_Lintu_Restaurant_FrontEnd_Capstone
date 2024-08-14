@@ -2,7 +2,8 @@ import React from 'react'
 import { useState,useEffect } from 'react';
 function Catering() {
   const [data,setData]  = useState(null);
-  let baseURI= `http://localhost:5051`;
+  //let baseURI= `http://localhost:5051`;
+  let baseURI =`https://indian-cuisine-fw2j.onrender.com`;
   //Function to getMenu
 const getMenu = async () => {
   // make fetch request and store response

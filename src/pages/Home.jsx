@@ -100,7 +100,7 @@ function Home() {
               alt="Signature Items"
             />
             <div className="card-body">
-              <h5 className="card-title">Signature Items</h5>
+              <h5 className="card-title">Dum Biriyani</h5>
               <p className="card-text">Some quick example text to 3.</p>
               <a href="#" className="btn btn-primary">
                 Order

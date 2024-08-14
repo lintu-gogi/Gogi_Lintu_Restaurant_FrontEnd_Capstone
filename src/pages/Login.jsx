@@ -1,5 +1,5 @@
 
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 function Login() {
 
   const [data, setData] = useState([]);
@@ -12,20 +12,13 @@ function Login() {
     console.log(filteredData);
     setData(filteredData);
     
- 
-    //Using fetch Save Data to Customer collection and Order collection
-
-    try{
-      const response = await fetch(`${baseURI}/getmenu`);
-      // Parse JSON response into a javascript object
-      const data = await response.json();
-      console.log(data);
-      //set the Menu state to the setData
-      setData(data)
-     
-    }catch(e){
-      console.log(e);
-    }
+    // Fetch items from the backend
+    useEffect(() => {
+      fetch('http://localhost:5000/api/items')
+        .then(response => response.json())
+        .then(data => setItems(data))
+        .catch(error => console.error('Error fetching items:', error));
+    }, []);
   }
   return (
     <>

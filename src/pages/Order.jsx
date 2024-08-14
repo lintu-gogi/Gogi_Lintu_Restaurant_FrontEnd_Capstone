@@ -2,7 +2,8 @@
 import { useState } from 'react';
 //import axios from 'axios'
 function Order() {
-  let baseURI= `http://localhost:5051`;
+  //let baseURI= `http://localhost:5051`;
+  let baseURI =`https://indian-cuisine-fw2j.onrender.com`;
   // Sample data
   const initialData = [
     { id: 1, name: 'Chicken Biryani', price: 15, selected: false },

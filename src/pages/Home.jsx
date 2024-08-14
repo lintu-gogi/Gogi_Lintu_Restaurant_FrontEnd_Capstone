@@ -1,9 +1,10 @@
-import React from 'react'
+
 import { useState } from 'react'
 import axios from 'axios'
 
 function Home() {
   // State to hold the input values
+  // Save
   const [formData, setFormData] = useState({
     firstntext: '',
     lastntext: '',

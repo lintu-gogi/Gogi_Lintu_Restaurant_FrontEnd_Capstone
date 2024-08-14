@@ -2,11 +2,12 @@ import React from 'react'
 import { useState,useEffect } from 'react';
 function Catering() {
   const [data,setData]  = useState(null);
+  let baseURI= `http://localhost:5051`;
   //Function to getMenu
 const getMenu = async () => {
   // make fetch request and store response
   try{
-  const response = await fetch(`http://localhost:5051/getmenu`);
+  const response = await fetch(`${baseURI}/getmenu`);
   // Parse JSON response into a javascript object
   const data = await response.json();
   console.log(data);

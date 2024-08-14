@@ -2,6 +2,7 @@
 import { useState } from 'react';
 //import axios from 'axios'
 function Order() {
+  let baseURI= `http://localhost:5051`;
   // Sample data
   const initialData = [
     { id: 1, name: 'Chicken Biryani', price: 15, selected: false },
@@ -66,8 +67,35 @@ function Order() {
       secondPayload: filteredData,
       idPayload: uniqueId
     };
-    //let getCustId;
-    //Save Customer details in Customer Collection
+ 
+    //Using fetch Save Data to Customer collection and Order collection
+
+    try {
+      const response = await fetch(`${baseURI}/submit_cust`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (response.ok) {
+        // Request was successful
+        const data = await response.json();
+        setResponsestatus(data.message);
+        alert(`Order Placed!!! Order No is: ${uniqueId}`);  // This triggers the alert
+      } else {
+        // Handle errors here
+        alert('Request failed!');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred!');
+    }
+   
+    //  Data saved successfully
+  }
+   //Save Customer details in Customer Collection
     //Using axios
     /*try {
       const response = await axios.post('http://localhost:5051/submit_cust', formData);
@@ -78,29 +106,6 @@ function Order() {
     } catch (error) {
       console.error('Error:', error);
     }*/
-    //Using fetch
-    fetch('http://localhost:5051/submit_cust', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(payload),
-    })
-    .then((response) => response.json())
-    .then((jsonresponse) => {
-      // Get response data
-      console.log('Response data:', jsonresponse.message);
-      setResponsestatus(jsonresponse);
-    })
-    .catch((error) => {
-      console.error('Error:', error);
-    }); 
-    
-    if(responsestatus!==''){
-      console.log("Order Placed");
-      alert(`Order Placed!!! Order No is: ${uniqueId}`)
-    }
-  }
     // Get the Customer Id from the customer collection and save it to the Order collection(to link the collections)
     /*try {
       //fetch(`https://api.thecatapi.com/v1/images/search?limit=15&breed_ids=${selectedBreedId}`)
@@ -109,8 +114,6 @@ function Order() {
     } catch (error) {
       console.error('Error:', error);
     }*/
-  
-  
 
   return (
     <>

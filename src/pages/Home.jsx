@@ -3,8 +3,8 @@ import { useState } from 'react'
 import axios from 'axios'
 
 function Home() {
-  let baseURI= `http://localhost:5051`;
-  //let baseURI =`https://indian-cuisine-fw2j.onrender.com`;
+  //let baseURI= `http://localhost:5051`;
+  let baseURI =`https://indian-cuisine-fw2j.onrender.com`;
   // State to hold the input values
  
   const [formData, setFormData] = useState({

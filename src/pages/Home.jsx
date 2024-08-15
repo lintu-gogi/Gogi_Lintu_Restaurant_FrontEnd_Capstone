@@ -3,8 +3,10 @@ import { useState } from 'react'
 import axios from 'axios'
 
 function Home() {
+  let baseURI= `http://localhost:5051`;
+  //let baseURI =`https://indian-cuisine-fw2j.onrender.com`;
   // State to hold the input values
-  // Save
+ 
   const [formData, setFormData] = useState({
     firstntext: '',
     lastntext: '',
@@ -28,13 +30,22 @@ function Home() {
     e.preventDefault();
     console.log('Form Data:', formData);
     try {
-      const response = await axios.post('http://localhost:5051/submitre', formData);
+      const response = await axios.post(`${baseURI}/submitre`, formData);
       console.log(response.data);
+      if(response.data){
+        alert("Reserved")
+        setFormData({firstntext: '',
+          lastntext: '',
+          datetext: '',
+          timetext: '',
+          emailtext: '',
+          phnotext: ''})
+      }
+      else{alert("Failed")}
     } catch (error) {
       console.error('Error:', error);
     }
-    // Here you can perform any action with the form data, such as saving it to a database or logging it
-    //console.log('Form Data:', formData);
+  
   };
     return (
         <>
@@ -68,7 +79,7 @@ function Home() {
             />
             <div className="card-body">
               <h5 className="card-title">Goat Biriyani</h5>
-              <p className="card-text">Some quick example text to 1.</p>
+              <p className="card-text"> Mutton biryani is an aromatic rice dish made with layers of tender mutton pieces, fragrant basmati rice, deep fried onions ...</p>
               <a href="#" className="btn btn-primary">
                 Order
               </a>
@@ -85,7 +96,7 @@ function Home() {
             />
             <div className="card-body">
               <h5 className="card-title">Chicken Biriyani</h5>
-              <p className="card-text">Some quick example text to 2.</p>
+              <p className="card-text">Aromatic, delicious and spicy one pot chicken biryani made with basmati rice, spices, chicken and herbs.</p>
               <a href="#" className="btn btn-primary">
                 Order
               </a>
@@ -102,7 +113,7 @@ function Home() {
             />
             <div className="card-body">
               <h5 className="card-title">Dum Biriyani</h5>
-              <p className="card-text">Some quick example text to 3.</p>
+              <p className="card-text">Dum biryani, a classic dish of the Mughal Nizams is an eye-catching aromatic rice chicken, mutton, spices...</p>
               <a href="#" className="btn btn-primary">
                 Order
               </a>
@@ -122,7 +133,7 @@ function Home() {
     <br></br>
     <div className="image-reserve">
       <img src="https://as1.ftcdn.net/v2/jpg/02/38/10/52/1000_F_238105207_2jrGVrP5mtzB0LFYJJoZIrI09xy7wHDp.jpg" alt="Restaurant Image" />
-      <p><b>Welcome To Indian Cuisine!!!  </b>We want you to fall in love with our food. That's why we settle for nothing but fresh, premium quality spices and ingredients. 
+      <p><b>Welcome To Indian Cuisine!!!  </b>We want you to fall in love with our food. That is why we settle for nothing but fresh, premium quality spices and ingredients. 
       Our friendly atmosphere and attentive service and affordable prices will keep you coming back again and again...</p>
     </div>
     <br></br>

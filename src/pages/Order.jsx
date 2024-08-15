@@ -96,25 +96,7 @@ function Order() {
    
     //  Data saved successfully
   }
-   //Save Customer details in Customer Collection
-    //Using axios
-    /*try {
-      const response = await axios.post('http://localhost:5051/submit_cust', formData);
-      console.log("Response Data");
-      console.log(response);
-      getCustId=response.data._id;
-      console.log(getCustId);
-    } catch (error) {
-      console.error('Error:', error);
-    }*/
-    // Get the Customer Id from the customer collection and save it to the Order collection(to link the collections)
-    /*try {
-      //fetch(`https://api.thecatapi.com/v1/images/search?limit=15&breed_ids=${selectedBreedId}`)
-      const response = await axios.post(`http://localhost:5051/submit_order/custid=${getCustId}`, filteredData);
-      console.log(response.data);
-    } catch (error) {
-      console.error('Error:', error);
-    }*/
+   
 
   return (
     <>

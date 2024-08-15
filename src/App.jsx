@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import 'bootstrap/dist/css/bootstrap.css'
 import './App.css'
 import {Route, Routes} from "react-router-dom"
 import Nav from './components/Nav';
@@ -7,7 +7,6 @@ import Catering from './pages/Catering';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Order from './pages/Order';
-import ImageAndDes from './components/ImageAndDes';
 import Footer from './components/Footer';
 function App() {
   

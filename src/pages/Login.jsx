@@ -1,57 +1,73 @@
 
-import { useState,useEffect } from 'react';
+import { useState } from 'react';
 function Login() {
+  const [items, setItems] = useState([]);
+  const [selectedItems, setSelectedItems] = useState([]);
+  
+  //let baseURI= `http://localhost:5051`;
+  let baseURI =`https://indian-cuisine-fw2j.onrender.com`;
+  // Fetch items from the backend
+  
+ 
+  const handleViewOrders=async(e)=>{
+    e.preventDefault(); 
+    try {
+      const response = await fetch(`${baseURI}/orderitems`, {
+        method: 'GET'
+        
+      });
 
-  const [data, setData] = useState([]);
-  let baseURI= `http://localhost:5051`;
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+      if (response.ok) {
+        // Request was successful
+        const data = await response.json();
+        setItems(data);
+      } else {
+        // Handle errors here
+        alert('Request failed!');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('An error occurred!');
+    }
    
-    //Checked Menu Items
-    const filteredData = data.filter((item) => item.selected);
-    console.log(filteredData);
-    setData(filteredData);
-    
-    // Fetch items from the backend
-    useEffect(() => {
-      fetch('http://localhost:5000/api/items')
-        .then(response => response.json())
-        .then(data => setItems(data))
-        .catch(error => console.error('Error fetching items:', error));
-    }, []);
   }
+  // Handle checkbox change
+  const handleCheckboxChange = (id) => {
+    setSelectedItems(prevSelectedItems =>
+      prevSelectedItems.includes(id)
+        ? prevSelectedItems.filter(itemId => itemId !== id)
+        : [...prevSelectedItems, id]
+    );
+  };
+  // Handle delete button click
+  const handleDelete = () => {
+    fetch(`${baseURI}/deleteorders`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ ids: selectedItems }),
+    })
+      .then(response => response.json())
+      .then(data => {
+        alert(data.message);
+        setItems(prevItems => prevItems.filter(item => !selectedItems.includes(item._id)));
+        setSelectedItems([]);
+      })
+      .catch(error => console.error('Error deleting items:', error));
+  };
   return (
     <>
-      <nav className="navbar bg-dark navbar-dark">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            Login Home
-          </a>
-        </div>
-      </nav>
+      
 
       <div className="container-fluid">
-        <div className="row">
-          <h5 style={{ textAlign: 'left' }}>
-            Login
-          </h5>
-        </div>
 
         <div className="row">
-          <form action="process.php" method="post">
+          <form >
             <br />
-            <p>
-              User Name<br />
-              <input name="text" type="text" placeholder="Enter Name" />
-            </p>
 
-            <p>
-              Password<br />
-              <input type="password" placeholder="Enter Password" />
-            </p>
-
-            <button type="button" className="btn btn-dark" id="liveAlertBtn">
-              Login
+            <button type="button" onClick={handleViewOrders} className="btn btn-dark" id="liveAlertBtn">
+              View Orders
             </button>
     
           </form>
@@ -70,25 +86,26 @@ function Login() {
             </tr>
           </thead>
           <tbody>
-            {data.map((item) => (
-              <tr key={item.id}>
+            {items.map((item) => (
+              <tr key={item._id}>
                 <td>
                   <input
                     type="checkbox"
-                    checked={item.selected}
-                    onChange={() => handleCheckboxChange(item.id)}
+                    //checked={item.order_select}
+                    checked={selectedItems.includes(item._id)}
+                    onChange={() => handleCheckboxChange(item._id)}
                   />
                 </td>
-                <td>{item.cust_name}</td>
-                <td>{item.name}</td>
-                <td>{item.price}</td>
+                <td>{item.custname}</td>
+                <td>{item.order_item}</td>
+                <td>{item.item_price}</td>
               </tr>
             ))}
           </tbody>
         </table>
       </div>
       <div className="row">
-        <button className="btn btn-dark" onClick={handleSubmit}>
+        <button className="btn btn-dark" onClick={handleDelete}>
           Delete Orders
         </button>
       </div>

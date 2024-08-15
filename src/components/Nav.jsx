@@ -1,6 +1,6 @@
-import React from 'react'
+
 import {Link} from "react-router-dom"
-export default function Nav(props) {
+export default function Nav() {
   return (
     <div className='nav'>
         
@@ -17,7 +17,7 @@ export default function Nav(props) {
             <div>Order Now</div>
         </Link>
         <Link to="/login">
-            <div>Login</div>
+            <div>View Orders</div>
         </Link>
         
     </div>
